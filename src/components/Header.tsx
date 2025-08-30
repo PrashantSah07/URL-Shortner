@@ -1,25 +1,45 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from './Button';
 import { motion, AnimatePresence } from 'framer-motion'
 import bgShorten from '@/assets/bg-shorten.png'
-
+import { FaGithub } from "react-icons/fa";
+import ThemeToggleButton from "@/components/ui/theme-toggle-button"
+import { useTheme } from "next-themes"
 
 const Header = () => {
     const [isShow, setIsShow] = useState(false);
+    const { theme, systemTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => setMounted(true), []);
+
+    const currentTheme = mounted ? theme === "system" ? systemTheme : theme : 'light';
+
     return (
         <>
-            <div className='sticky top-0 z-100 bg-white flex justify-between items-center 2xl:px-30 md:px-10 px-5 md:py-7 py-5 shadow'>
+            <div className={`sticky top-0 z-100 flex justify-between ${currentTheme === "light" ? "bg-gray-100" : "border-b border-[#ffffff0d] bg-[#060606]"
+                } items-center 2xl:px-30 md:px-10 px-5 py-5 shadow`}>
                 <ul className='flex items-center lg:gap-10 gap-6'>
-                    <Link href=''><h1 className='text-[22px] font-bold'>EasyURL</h1></Link>
-                    <Link href='' className='hidden sm:flex'><li className='text-[14.5px] lg:font-semibold font-medium text-gray-500'>Features</li></Link>
-                    <Link href='' className='hidden sm:flex'><li className='text-[14.5px] lg:font-semibold font-medium text-black'>Pricing</li></Link>
-                    <Link href='' className='hidden sm:flex'><li className='text-[14.5px] lg:font-semibold font-medium text-gray-500'>Resources</li></Link>
+                    <Link href=''><h1 className={`text-[22px] font-bold ${currentTheme === "light" ? 'text-gray-800' : 'text-gray-200'} `}>EasyURL</h1></Link>
+                    <Link href='' className='hidden sm:flex'><li className={`text-[14.5px] lg:font-semibold font-medium ${currentTheme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>Features</li></Link>
+                    <Link href='' className='hidden sm:flex'><li
+                        className={`text-[14.5px] lg:font-semibold font-medium ${currentTheme === "light" ? "text-black" : "text-white"
+                            }`}>
+                        Pricing
+                    </li></Link>
+                    <Link href='' className='hidden sm:flex'><li className={`text-[14.5px] lg:font-semibold font-medium ${currentTheme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>Resources</li></Link>
                 </ul>
-                <ul className='hidden md:flex items-center lg:gap-10 gap-6 text-[14.5px] lg:font-semibold font-medium text-gray-500'>
-                    <Link href=''><li>Login</li></Link>
-                    <Link href=''><Button text={'Sign up'} color={'#2ACFCF'} rounded={'20px'} /></Link>
+                <ul className='hidden md:flex items-center lg:gap-10 gap-6 text-[14.5px] lg:font-semibold font-medium'>
+                    <Link href=''><Button text={'Sign up'} color={'#8b3dff'} rounded={'20px'} /></Link>
+                    <div className='flex items-center gap-2'>
+                        <Link href='https://github.com/PrashantSah07' target='_blank'>
+                            <button className={`rounded-[8px] p-[8px] border ${currentTheme === "light" ? "hover:bg-gray-100" : "hover:bg-[#2c2c2e4e]"
+                                } duration-100 `}><FaGithub size={18} /> </button>
+                        </Link>
+                        <ThemeToggleButton />
+                    </div>
                 </ul>
                 <button className={`md:hidden flex flex-col ${!isShow && 'gap-1'} p-1 relative`} onClick={() => setIsShow(true)}>
                     <span className={`w-[20px] h-[2px] duration-200 bg-black ${isShow && 'absolute rotate-45'}`}></span>
@@ -42,7 +62,7 @@ const Header = () => {
                             </ul>
                             <ul className='flex flex-col gap-5 items-center py-5 w-full'>
                                 <Link href=''><li className='text-[15px] font-medium'>Login</li></Link>
-                                <Link href='' className='w-full'><li className='text-[15px] text-center bg-[#2ACFCF] font-medium w-full px-10 rounded-full py-3'>Sign up</li></Link>
+                                <Link href='' className='w-full'><li className='text-[15px] text-center bg-[#8b3dff] font-medium w-full px-10 rounded-full py-3'>Sign up</li></Link>
                             </ul>
                         </div>
                     </motion.div>
