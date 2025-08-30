@@ -31,9 +31,9 @@ const Header = () => {
                     </li></Link>
                     <Link href='' className='hidden sm:flex'><li className={`text-[14.5px] lg:font-semibold font-medium ${currentTheme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>Resources</li></Link>
                 </ul>
-                <ul className='hidden md:flex items-center lg:gap-10 gap-6 text-[14.5px] lg:font-semibold font-medium'>
-                    <Link href=''><Button text={'Sign up'} color={'#8b3dff'} rounded={'20px'} /></Link>
-                    <div className='flex items-center gap-2'>
+                <ul className='flex items-center lg:gap-10 gap-6 text-[14.5px] lg:font-semibold font-medium md:w-fit w-full'>
+                    <Link href='' className='hidden md:flex w-full'><Button text={'Sign up'} color={'#8b3dff'} rounded={'20px'} /></Link>
+                    <div className='flex justify-end md:w-fit w-full gap-2'>
                         <Link href='https://github.com/PrashantSah07' target='_blank'>
                             <button className={`rounded-[8px] p-[8px] border ${currentTheme === "light" ? "hover:bg-gray-100" : "hover:bg-[#2c2c2e4e]"
                                 } duration-100 `}><FaGithub size={18} /> </button>
@@ -41,10 +41,10 @@ const Header = () => {
                         <ThemeToggleButton />
                     </div>
                 </ul>
-                <button className={`md:hidden flex flex-col ${!isShow && 'gap-1'} p-1 relative`} onClick={() => setIsShow(true)}>
-                    <span className={`w-[20px] h-[2px] duration-200 bg-black ${isShow && 'absolute rotate-45'}`}></span>
-                    {!isShow && <span className={`w-[20px] h-[2px] bg-black`}></span>}
-                    <span className={`w-[20px] h-[2px] duration-200 bg-black ${isShow && '-rotate-45'}`}></span>
+                <button className={`md:hidden ml-2 rounded-[8px] px-[8px] py-[10px] border flex flex-col ${!isShow && 'gap-1'} p-1 relative`} onClick={() => setIsShow(true)}>
+                    <span className={`w-[20px] h-[2px] duration-200 ${currentTheme === "light" ? "bg-gray-800" : "bg-gray-200"} ${isShow && 'absolute rotate-45'}`}></span>
+                    {!isShow && <span className={`w-[20px] h-[2px] ${currentTheme === "light" ? "bg-gray-800" : "bg-gray-200"}`}></span>}
+                    <span className={`w-[20px] h-[2px] duration-200 ${currentTheme === "light" ? "bg-gray-800" : "bg-gray-200"} ${isShow && '-rotate-45'}`}></span>
                 </button>
             </div>
             <AnimatePresence>
